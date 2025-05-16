@@ -30,7 +30,7 @@
             <objects>
                 <viewController id="iFK-jj-hsb" customClass="LoginViewController" customModule="WeatherMate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9yy-Ht-qwc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="WeatherMate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuO-00-Q43">
@@ -76,7 +76,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="createAccountButtonTapped:" destination="iFK-jj-hsb" eventType="touchUpInside" id="gla-bW-uep"/>
-                                    <segue destination="Jvg-ES-2x6" kind="show" id="vOj-pV-j1Z"/>
+                                    <segue destination="Jvg-ES-2x6" kind="show" identifier="loginToRegister" id="vOj-pV-j1Z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -117,14 +117,14 @@
             <objects>
                 <viewController id="743-a9-uhw" customClass="WeatherViewController" customModule="WeatherMate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ohq-Se-pvw">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="W6b-wx-Wn5">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4V0-rU-5Uc">
-                                <rect key="frame" x="20" y="103" width="353" height="715"/>
+                                <rect key="frame" x="20" y="0.0" width="353" height="842"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ghn-Pw-9eP">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="40"/>
@@ -195,7 +195,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOv-4L-u4P">
-                                        <rect key="frame" x="113" y="355.66666666666674" width="240" height="359.33333333333326"/>
+                                        <rect key="frame" x="113" y="355.66666666666674" width="240" height="486.33333333333326"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -234,7 +234,7 @@
             <objects>
                 <viewController id="Jvg-ES-2x6" customClass="RegisterViewController" customModule="WeatherMate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iK9-hk-9ld">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="WeatherMate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldg-a9-28H">
@@ -261,7 +261,8 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="743-a9-uhw" kind="show" id="sBr-lb-ABP"/>
+                                    <action selector="registerButtonTapped:" destination="Jvg-ES-2x6" eventType="touchUpInside" id="93g-da-XUZ"/>
+                                    <segue destination="743-a9-uhw" kind="show" identifier="registerToHome" id="sBr-lb-ABP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6q-HK-h9G">
@@ -277,6 +278,10 @@
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="alreadyHaveAccountButtonTapped:" destination="Jvg-ES-2x6" eventType="touchUpInside" id="6Lb-eJ-sKq"/>
+                                    <segue destination="iFK-jj-hsb" kind="show" identifier="registerToLogin" id="Ig8-wS-vIR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OaN-hr-Gg5"/>
@@ -302,6 +307,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Register" id="aNo-JH-9ri"/>
+                    <connections>
+                        <outlet property="emailTextfield" destination="jdM-zn-XMt" id="dWl-xh-ny8"/>
+                        <outlet property="passwordTextfield" destination="LlE-jM-TqV" id="29O-Xw-KDC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oC5-dP-SuS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -309,7 +318,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SZH-t3-GsH"/>
+        <segue reference="sBr-lb-ABP"/>
+        <segue reference="Ig8-wS-vIR"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="662" height="662"/>

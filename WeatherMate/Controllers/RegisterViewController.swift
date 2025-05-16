@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 class RegisterViewController: UIViewController {
+    
+    @IBOutlet weak var emailTextfield: UITextField!
+    
+    @IBOutlet weak var passwordTextfield: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,6 +30,24 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "registerToLogin", sender: self)
+    }
+    
+    
+    @IBAction func registerButtonTapped(_ sender: UIButton) {
+        if let email = emailTextfield.text, let password = passwordTextfield.text{
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if let e = error{
+                    print(e.localizedDescription)
+                }else{
+                    self.performSegue(withIdentifier: "registerToHome", sender: self)
+                }
+            }
+        }
     }
     
 
