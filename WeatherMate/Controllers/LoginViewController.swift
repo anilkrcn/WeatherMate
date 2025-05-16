@@ -14,8 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextfield: UITextField!
     
     
-    
-    
+    //MARK: - ViewAppear functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
@@ -32,6 +31,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //MARK: - Button Actions
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
     }

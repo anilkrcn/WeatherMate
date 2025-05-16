@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D6D2F4572DD7CF5200AC232A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6D2F4562DD7CF5200AC232A /* FirebaseAuth */; };
+		D6D2F4592DD7CF5200AC232A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D6D2F4582DD7CF5200AC232A /* FirebaseCore */; };
+		D6D2F45B2DD7CF5300AC232A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D6D2F45A2DD7CF5300AC232A /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D6C05DB22DD630F5004C6052 /* WeatherMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D2F4592DD7CF5200AC232A /* FirebaseCore in Frameworks */,
+				D6D2F4572DD7CF5200AC232A /* FirebaseAuth in Frameworks */,
+				D6D2F45B2DD7CF5300AC232A /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = WeatherMate;
 			packageProductDependencies = (
+				D6D2F4562DD7CF5200AC232A /* FirebaseAuth */,
+				D6D2F4582DD7CF5200AC232A /* FirebaseCore */,
+				D6D2F45A2DD7CF5300AC232A /* FirebaseFirestore */,
 			);
 			productName = WeatherMate;
 			productReference = D6C05DB22DD630F5004C6052 /* WeatherMate.app */;
@@ -107,6 +119,9 @@
 			);
 			mainGroup = D6C05DA92DD630F5004C6052;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6C05DB32DD630F5004C6052 /* Products */;
 			projectDirPath = "";
@@ -333,6 +348,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D6D2F4562DD7CF5200AC232A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D6D2F4582DD7CF5200AC232A /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		D6D2F45A2DD7CF5300AC232A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6C05DAA2DD630F5004C6052 /* Project object */;
 }
