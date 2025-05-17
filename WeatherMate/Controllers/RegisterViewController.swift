@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "registerToLogin", sender: self)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     
@@ -44,7 +44,7 @@ class RegisterViewController: UIViewController {
                 if let e = error{
                     print(e.localizedDescription)
                 }else{
-                    self.performSegue(withIdentifier: "registerToHome", sender: self)
+                    self.performSegue(withIdentifier: "registerToLogin", sender: self)
                 }
             }
         }

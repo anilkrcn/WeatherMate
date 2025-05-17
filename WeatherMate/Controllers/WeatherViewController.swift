@@ -1,12 +1,3 @@
-//
-//  ViewController.swift
-//  Clima
-//
-//  Created by Angela Yu on 01/09/2019.
-//  Copyright © 2019 App Brewery. All rights reserved.
-//
-
-
 //api key = 38b19d794c1422d39a6452e99a6df31c
 
 import UIKit

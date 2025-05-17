@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     //MARK: - Button Actions
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "loginToRegister", sender: self)
+        
     }
     
     
