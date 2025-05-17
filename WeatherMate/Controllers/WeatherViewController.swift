@@ -14,6 +14,7 @@ class WeatherViewController: UIViewController{
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
