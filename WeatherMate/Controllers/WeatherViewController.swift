@@ -2,6 +2,9 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 class WeatherViewController: UIViewController{
     
@@ -11,9 +14,16 @@ class WeatherViewController: UIViewController{
     
     @IBOutlet weak var searchTextField: UITextField!
     
+    
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    var favorites: [FavoriteModel] = []
+    var isFavorite: Bool = false
+    
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
     
+    let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,11 +44,61 @@ class WeatherViewController: UIViewController{
         
         weatherManager.delegate = self
         searchTextField.delegate = self
+        loadFavorites()
     }
     
     @IBAction func locationPressed(_ sender: UIButton) {
         locationManager.requestLocation()
     }
+    
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+        if !isFavorite{
+            isFavorite = true
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            if let publisher = Auth.auth().currentUser?.email {
+                db.collection("Favorites").addDocument(data: [
+                    "usermail": publisher,
+                    "cityName": cityLabel.text!
+                ]){(error) in
+                    if let e = error{
+                        print("There was an issue saving data to firestore, \(e)")
+                    }else{
+                        print("Succesfully saved data")
+                        self.loadFavorites()
+                    }
+                }
+            }
+        }else{
+            isFavorite = false
+            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+    func loadFavorites(){
+        let db = Firestore.firestore()
+        db.collection("Favorites")
+            .addSnapshotListener{ querySnapshot, error in
+                self.favorites = []
+            
+            if let e = error{
+                print("Firestore couldnt get the data, \(e)")
+            }else{
+                if let snapshotDocuments = querySnapshot?.documents{
+                    for doc in snapshotDocuments{
+                        let data = doc.data()
+                        if let usermail = data["usermail"] as? String,
+                           let cityName = data["cityName"] as? String{
+                            
+                            let newFavorite = FavoriteModel(userMail: usermail, cityname: cityName)
+                            self.favorites.append(newFavorite)
+                            print(self.favorites[0].cityname)
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
 }
 
 //MARK: - UITextFieldDelegate

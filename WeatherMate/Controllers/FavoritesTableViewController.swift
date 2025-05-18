@@ -6,19 +6,48 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class FavoritesTableViewController: UITableViewController {
     
-    var favorites: [WeatherModel] = []
+    var favorites: [FavoriteModel] = []
+    var weatherManager = WeatherManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        loadFavorites()
+        tableView.rowHeight = 150
+    }
+    
+    func loadFavorites(){
+        let db = Firestore.firestore()
+        db.collection("Favorites")
+            .addSnapshotListener{ querySnapshot, error in
+                self.favorites = []
+            
+            if let e = error{
+                print("Firestore couldnt get the data, \(e)")
+            }else{
+                if let snapshotDocuments = querySnapshot?.documents{
+                    for doc in snapshotDocuments{
+                        let data = doc.data()
+                        if let usermail = data["usermail"] as? String,
+                           let cityName = data["cityName"] as? String{
+                            
+                            let newFavorite = FavoriteModel(userMail: usermail, cityname: cityName)
+                            self.favorites.append(newFavorite)
+                            print(self.favorites[0].cityname)
+                        }
+                    }
+                    
+                }
+            }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+        }
     }
 
     // MARK: - Table view data source
@@ -34,12 +63,12 @@ class FavoritesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
         let fav = favorites[indexPath.row]
         
-        cell.cityLabel.text = fav.name
-        cell.temperatureLabel.text = fav.temperatureString
-        cell.weatherImage.image = UIImage(systemName: fav.conditionName)
+        //weatherManager.fetchWeather(cityName: fav.cityname)
+        cell.cityLabel.text = fav.cityname
 
         return cell
     }
+    
     
 
     /*
