@@ -13,13 +13,13 @@ class FavoriteCell: UITableViewCell{
     @IBOutlet weak var weatherImage: UIImageView!
     
     @IBOutlet weak var temperatureLabel: UILabel!
-    
-    
     @IBOutlet weak var cityLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        temperatureLabel.adjustsFontSizeToFitWidth = true
+        cityLabel.adjustsFontSizeToFitWidth = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

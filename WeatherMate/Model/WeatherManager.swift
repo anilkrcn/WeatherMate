@@ -21,11 +21,6 @@ struct WeatherManager{
         performRequest(with: urlString)
     }
     
-    func fetchWeatherForFavorites(city: String){
-        let urlString = "\(weatherURL)&q=\(city)"
-       // performRequestForFavorites(with: urlString)
-    }
-    
     
     func performRequest(with urlString: String){
         //Create URL
