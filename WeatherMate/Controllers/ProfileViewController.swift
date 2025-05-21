@@ -17,11 +17,12 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+        //navigationController?.isNavigationBarHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,45 +35,36 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
             super.viewDidLoad()
-            setupUI()
+            
             displayUserEmail()
+            setupSwitch()
+            navigationItem.hidesBackButton = true
         }
 
-        private func setupUI() {
-            // UISwitch'in durumu, sistemin mevcut arayüz stiline göre ayarlanır.
-            themeSwitch.isOn = traitCollection.userInterfaceStyle == .dark
-            themeSwitch.addTarget(self, action: #selector(themeSwitchToggled), for: .valueChanged)
-        }
+      
 
         private func displayUserEmail() {
             if let user = Auth.auth().currentUser {
-                mailLabel.text = "Logged in as: \(user.email ?? "Unknown Email")"
+                mailLabel.text = "\(user.email ?? "Unknown Email")"
             } else {
                 mailLabel.text = "Not logged in"
             }
         }
 
-        @IBAction func logoutButtonTapped(_ sender: UIButton) {
-            do {
-                try Auth.auth().signOut()
-                showAlert(message: "You have been logged out.") {
-                    // Kullanıcıyı giriş ekranına yönlendirin
-                    self.redirectToLoginScreen()
-                }
-            } catch {
-                showAlert(message: "Logout failed: \(error.localizedDescription)")
+
+    @IBAction func logoutButtonPressed(_ sender: UIButton) {
+        do {
+            try Auth.auth().signOut()
+            showAlert(message: "You have been logged out.") {
+                // Kullanıcıyı giriş ekranına yönlendirin
+                self.navigationController?.popToRootViewController(animated: true)
             }
+        } catch {
+            showAlert(message: "Logout failed: \(error.localizedDescription)")
         }
-
-        @objc private func themeSwitchToggled() {
-            let isDarkMode = themeSwitch.isOn
-            UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
-            updateAppTheme(isDarkMode: isDarkMode)
-        }
-
-        private func updateAppTheme(isDarkMode: Bool) {
-            overrideUserInterfaceStyle = isDarkMode ? .dark : .light
-        }
+    }
+    
+       
 
         private func showAlert(message: String, completion: (() -> Void)? = nil) {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -89,6 +81,26 @@ class ProfileViewController: UIViewController {
             let loginVC = storyboard.instantiateViewController(identifier: "LoginViewController")
             window.rootViewController = loginVC
             window.makeKeyAndVisible()
+        }
+    
+    func setupSwitch() {
+            // Switch durumu UserDefaults'tan alınır
+            themeSwitch.isOn = UserDefaults.standard.bool(forKey: "isDarkMode")
+            themeSwitch.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+
+            view.addSubview(themeSwitch)
+        }
+    
+    @objc func switchChanged() {
+            let isDarkMode = themeSwitch.isOn
+            UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+            applyTheme()
+        }
+    
+    func applyTheme() {
+            guard let window = UIApplication.shared.windows.first else { return }
+            let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+            window.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
         }
 
 }

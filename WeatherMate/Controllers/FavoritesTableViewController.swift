@@ -18,17 +18,19 @@ class FavoritesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+        //navigationController?.isNavigationBarHidden = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadFavorites()
         tableView.rowHeight = 150
+        navigationItem.hidesBackButton = true
     }
     
     func loadFavorites(){
@@ -115,7 +117,8 @@ class FavoritesTableViewController: UITableViewController {
             //Start Task
             task.resume()
         }
-
+        cell.backgroundColor = .clear
+        cell.contentView.backgroundColor = .clear
         return cell
     }
     

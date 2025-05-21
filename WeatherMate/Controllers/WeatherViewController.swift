@@ -17,8 +17,10 @@ class WeatherViewController: UIViewController{
     
     @IBOutlet weak var favoriteButton: UIButton!
     
+    
     var favorites: [FavoriteModel] = []
     var isFavorite: Bool = false
+    var favCities: [String] = []
     
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
@@ -28,16 +30,17 @@ class WeatherViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+        //navigationController?.isNavigationBarHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
@@ -49,6 +52,16 @@ class WeatherViewController: UIViewController{
     
     @IBAction func locationPressed(_ sender: UIButton) {
         locationManager.requestLocation()
+    }
+    
+    func isFavoriteCity(){
+        if favCities.contains(cityLabel.text!){
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            isFavorite = true
+        }else{
+            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            isFavorite = false
+        }
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
@@ -87,13 +100,12 @@ class WeatherViewController: UIViewController{
                         let data = doc.data()
                         if let usermail = data["usermail"] as? String,
                            let cityName = data["cityName"] as? String{
-                            
+                            self.favCities.append(cityName)
                             let newFavorite = FavoriteModel(userMail: usermail, cityname: cityName)
                             self.favorites.append(newFavorite)
                             print(self.favorites[0].cityname)
                         }
                     }
-                    
                 }
             }
         }
@@ -108,6 +120,7 @@ extension WeatherViewController: UITextFieldDelegate {
     @IBAction func searchPressed(_ sender: UIButton) {
         searchTextField.endEditing(true)
         print(searchTextField.text!)
+        isFavoriteCity()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -128,6 +141,7 @@ extension WeatherViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = searchTextField.text{
             weatherManager.fetchWeather(cityName: city)
+            isFavoriteCity()
         }
         searchTextField.text = ""
     }
@@ -142,6 +156,7 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.temperatureLabel.text = weather.temperatureString
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
             self.cityLabel.text = weather.name
+            self.isFavoriteCity()
         }
     }
     

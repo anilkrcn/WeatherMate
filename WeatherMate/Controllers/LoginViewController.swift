@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+        //navigationController?.isNavigationBarHidden = false
     }
     
     override func viewDidLoad() {
@@ -48,6 +48,7 @@ class LoginViewController: UIViewController {
                     print(e.localizedDescription)
                 }else{
                     self.performSegue(withIdentifier: "loginSegue", sender: self)
+                    print("login pressed")
                 }
             }
         }
