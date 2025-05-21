@@ -6,16 +6,12 @@
 
 ## Screenshots
 
-![[Login Screen] (WeatherMate/Screenshots/loginLight.png)](https://github.com/anilkrcn/WeatherMate/blob/7ba21658169e1e8926ee2acbcd48cfea08ecb88b/WeatherMate/Screenshots/loginLight.png)
-![[Register Screen] (WeatherMate/Screenshots/registerLight.png)](https://github.com/anilkrcn/WeatherMate/blob/7ba21658169e1e8926ee2acbcd48cfea08ecb88b/WeatherMate/Screenshots/registerLight.png)
-![WeatherMate/Screenshots/homeLight.png](https://github.com/anilkrcn/WeatherMate/blob/main/WeatherMate/Screenshots/homeLight.png?raw=true)
-![[Favorites Screen] (WeatherMate/Screenshots/favoritesLight.png)](https://github.com/anilkrcn/WeatherMate/blob/7ba21658169e1e8926ee2acbcd48cfea08ecb88b/WeatherMate/Screenshots/favoritesLight.png)
-![[Profile Screen] (WeatherMate/Screenshots/profileLight.png)](https://github.com/anilkrcn/WeatherMate/blob/7ba21658169e1e8926ee2acbcd48cfea08ecb88b/WeatherMate/Screenshots/profileLight.png)
+<img src="WeatherMate/Screenshots/loginLight.png" alt="Login Screen" width="300">  <img src="WeatherMate/Screenshots/registerLight.png" alt="Register Screen" width="300">  <img src="WeatherMate/Screenshots/homeLight.png" alt="Home Screen" width="300">  <img src="WeatherMate/Screenshots/favoritesLight.png" alt="Favorite Screen" width="300">  <img src="WeatherMate/Screenshots/profileLight.png" alt="Profile Screen" width="300">
+
 
 **Dark Mode**
 
-![(.WeatherMate/Screenshots/homeDark.png)](https://github.com/anilkrcn/WeatherMate/blob/7ba21658169e1e8926ee2acbcd48cfea08ecb88b/WeatherMate/Screenshots/homeDark.png)
-![(.WeatherMate/Screenshots/profileDark.png)](https://github.com/anilkrcn/WeatherMate/blob/7ba21658169e1e8926ee2acbcd48cfea08ecb88b/WeatherMate/Screenshots/profileDark.png)
+<img src="WeatherMate/Screenshots/homeDark.png" alt="Home Screen" width="300"> <img src="WeatherMate/Screenshots/profileDark.png" alt="Profile Screen" width="300">
 
 ## Features
 
