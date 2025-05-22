@@ -16,7 +16,7 @@ class WeatherViewController: UIViewController{
     
     
     @IBOutlet weak var favoriteButton: UIButton!
-    
+    //Branch commit denemesi
     
     var favorites: [FavoriteModel] = []
     var isFavorite: Bool = false
