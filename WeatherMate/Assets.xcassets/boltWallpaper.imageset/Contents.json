@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "light_background.pdf",
+      "filename" : "Adsız tasarım-3.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "sunWallpaper.png",
+      "filename" : "Adsız tasarım-3 1.png",
       "idiom" : "universal"
     },
     {
@@ -21,15 +21,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "sunDarkWallpaper.png",
+      "filename" : "Adsız tasarım-4.png",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }

@@ -7,10 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60C57992DDF5EA600552AC3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D60C57982DDF5EA600552AC3 /* Lottie */; };
 		D6D2F4572DD7CF5200AC232A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6D2F4562DD7CF5200AC232A /* FirebaseAuth */; };
 		D6D2F4592DD7CF5200AC232A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D6D2F4582DD7CF5200AC232A /* FirebaseCore */; };
 		D6D2F45B2DD7CF5300AC232A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D6D2F45A2DD7CF5300AC232A /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D6CD9EFE2DDF5C27007D8BE1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D6C05DB22DD630F5004C6052 /* WeatherMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +59,7 @@
 				D6D2F4592DD7CF5200AC232A /* FirebaseCore in Frameworks */,
 				D6D2F4572DD7CF5200AC232A /* FirebaseAuth in Frameworks */,
 				D6D2F45B2DD7CF5300AC232A /* FirebaseFirestore in Frameworks */,
+				D60C57992DDF5EA600552AC3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +92,7 @@
 				D6C05DAE2DD630F5004C6052 /* Sources */,
 				D6C05DAF2DD630F5004C6052 /* Frameworks */,
 				D6C05DB02DD630F5004C6052 /* Resources */,
+				D6CD9EFE2DDF5C27007D8BE1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -90,6 +106,7 @@
 				D6D2F4562DD7CF5200AC232A /* FirebaseAuth */,
 				D6D2F4582DD7CF5200AC232A /* FirebaseCore */,
 				D6D2F45A2DD7CF5300AC232A /* FirebaseFirestore */,
+				D60C57982DDF5EA600552AC3 /* Lottie */,
 			);
 			productName = WeatherMate;
 			productReference = D6C05DB22DD630F5004C6052 /* WeatherMate.app */;
@@ -121,6 +138,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D60C57972DDF5EA600552AC3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6C05DB32DD630F5004C6052 /* Products */;
@@ -354,6 +372,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D60C57972DDF5EA600552AC3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 		D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -365,6 +391,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D60C57982DDF5EA600552AC3 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D60C57972DDF5EA600552AC3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		D6D2F4562DD7CF5200AC232A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D6D2F4552DD7CF5200AC232A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

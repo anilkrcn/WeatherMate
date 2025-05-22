@@ -5,15 +5,20 @@ import CoreLocation
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import Lottie
 
 class WeatherViewController: UIViewController{
     
-    @IBOutlet weak var conditionImageView: UIImageView!
+    //@IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
     
+    @IBOutlet weak var animationContainerView: UIView!
+    
+    var lottieAnimation: LottieAnimationView?
     
     @IBOutlet weak var favoriteButton: UIButton!
     //Branch commit denemesi
@@ -48,6 +53,8 @@ class WeatherViewController: UIViewController{
         weatherManager.delegate = self
         searchTextField.delegate = self
         loadFavorites()
+        //animationView.animation = LottieAnimation.named("rainy")
+        //animationView.play()
     }
     
     @IBAction func locationPressed(_ sender: UIButton) {
@@ -154,7 +161,9 @@ extension WeatherViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async{
             self.temperatureLabel.text = weather.temperatureString
-            self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+            //self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+            self.setupLottieAnimation(condition: weather.conditionName)
+            self.updateBackground(for: weather.conditionName)
             self.cityLabel.text = weather.name
             self.isFavoriteCity()
         }
@@ -179,5 +188,50 @@ extension WeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+}
+
+extension WeatherViewController{
+    func setupLottieAnimation(condition: String) {
+         // Lottie animasyonunu başlat
+        if lottieAnimation == nil {
+                lottieAnimation = LottieAnimationView(name: condition)
+                lottieAnimation?.frame = animationContainerView.bounds
+                lottieAnimation?.contentMode = .scaleAspectFit
+                lottieAnimation?.loopMode = .loop
+                lottieAnimation?.tintColor = .blue
+                if let lottieAnimation = lottieAnimation {
+                    animationContainerView.addSubview(lottieAnimation)
+                }
+            } else {
+                lottieAnimation?.animation = LottieAnimation.named(condition)
+            }
+            lottieAnimation?.play()
+     }
+    
+    func updateBackground(for weatherCondition: String) {
+        var backgroundImageName: String
+
+        switch weatherCondition {
+        case "sun":
+            backgroundImageName = "sunWallpaper"
+        case "snow":
+            backgroundImageName = "snowWallpaper"
+        case "fog":
+            backgroundImageName = "fogWallpaper"
+        case "bolt":
+            backgroundImageName = "boltWallpaper"
+        case "drizzle":
+            backgroundImageName = "drizzleWallpaper"
+        case "cloud":
+            backgroundImageName = "cloudWallpaper"
+        case "rainy":
+            backgroundImageName = "rainyWallpaper"
+        default:
+            backgroundImageName = "cloudWallpaper"
+        }
+
+        // Arka planı güncelle
+        backgroundImageView.image = UIImage(named: backgroundImageName)
     }
 }
