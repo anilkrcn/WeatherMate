@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+
 class FavoritesTableViewController: UITableViewController {
     
     var favorites: [FavoriteModel] = []
@@ -25,7 +26,7 @@ class FavoritesTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         //navigationController?.isNavigationBarHidden = false
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadFavorites()
@@ -38,28 +39,28 @@ class FavoritesTableViewController: UITableViewController {
         db.collection("Favorites")
             .addSnapshotListener{ querySnapshot, error in
                 self.favorites = []
-            
-            if let e = error{
-                print("Firestore couldnt get the data, \(e)")
-            }else{
-                if let snapshotDocuments = querySnapshot?.documents{
-                    for doc in snapshotDocuments{
-                        let data = doc.data()
-                        if let usermail = data["usermail"] as? String,
-                           let cityName = data["cityName"] as? String{
-                            
-                            let newFavorite = FavoriteModel(userMail: usermail, cityname: cityName)
-                            self.favorites.append(newFavorite)
-                            print(self.favorites[0].cityname)
+                
+                if let e = error{
+                    print("Firestore couldnt get the data, \(e)")
+                }else{
+                    if let snapshotDocuments = querySnapshot?.documents{
+                        for doc in snapshotDocuments{
+                            let data = doc.data()
+                            if let usermail = data["usermail"] as? String,
+                               let cityName = data["cityName"] as? String{
+                                
+                                let newFavorite = FavoriteModel(userMail: usermail, cityname: cityName)
+                                self.favorites.append(newFavorite)
+                                print(self.favorites[0].cityname)
+                            }
                         }
+                        
                     }
-                    
                 }
-            }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-        }
+            }
         
         
     }
@@ -78,15 +79,15 @@ class FavoritesTableViewController: UITableViewController {
             return nil
         }
     }
-
+    
     // MARK: - Table view data source
-
-
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return favorites.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
@@ -109,7 +110,8 @@ class FavoritesTableViewController: UITableViewController {
                         DispatchQueue.main.async {
                             cell.cityLabel.text = weather.name
                             cell.temperatureLabel.text = weather.temperatureString
-                            cell.weatherImage.image = UIImage(systemName: weather.conditionName)
+                            cell.updateBackground(for: weather.conditionName)
+                            cell.setupLottieAnimation(condition: weather.conditionName)
                         }
                     }
                 }
@@ -121,9 +123,4 @@ class FavoritesTableViewController: UITableViewController {
         cell.contentView.backgroundColor = .clear
         return cell
     }
-    
-    
-
-
-
 }

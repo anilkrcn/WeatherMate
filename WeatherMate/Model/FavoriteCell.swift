@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 class FavoriteCell: UITableViewCell{
     
@@ -14,6 +15,9 @@ class FavoriteCell: UITableViewCell{
     
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var animationContainerView: UIView!
+    
+    var lottieAnimation: LottieAnimationView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +30,48 @@ class FavoriteCell: UITableViewCell{
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func setupLottieAnimation(condition: String) {
+         // Lottie animasyonunu başlat
+        if lottieAnimation == nil {
+                lottieAnimation = LottieAnimationView(name: condition)
+                lottieAnimation?.frame = animationContainerView.bounds
+                lottieAnimation?.contentMode = .scaleAspectFit
+                lottieAnimation?.loopMode = .loop
+                lottieAnimation?.tintColor = .blue
+                if let lottieAnimation = lottieAnimation {
+                    animationContainerView.addSubview(lottieAnimation)
+                }
+            } else {
+                lottieAnimation?.animation = LottieAnimation.named(condition)
+            }
+            lottieAnimation?.play()
+     }
+    
+    func updateBackground(for weatherCondition: String) {
+        var backgroundImageName: String
+
+        switch weatherCondition {
+        case "sun":
+            backgroundImageName = "sunWallpaper"
+        case "snow":
+            backgroundImageName = "snowWallpaper"
+        case "fog":
+            backgroundImageName = "fogWallpaper"
+        case "bolt":
+            backgroundImageName = "boltWallpaper"
+        case "drizzle":
+            backgroundImageName = "drizzleWallpaper"
+        case "cloud":
+            backgroundImageName = "cloudWallpaper"
+        case "rainy":
+            backgroundImageName = "rainyWallpaper"
+        default:
+            backgroundImageName = "cloudWallpaper"
+        }
+
+        // Arka planı güncelle
+        weatherImage.image = UIImage(named: backgroundImageName)
     }
 }

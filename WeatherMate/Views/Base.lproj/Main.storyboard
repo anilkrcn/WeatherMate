@@ -286,8 +286,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="178"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cok-b0-4MR">
-                                            <rect key="frame" x="20" y="39" width="114" height="100"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cok-b0-4MR">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="178"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" name="weatherColor"/>
                                         </imageView>
@@ -312,9 +312,14 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdc-CG-Wr2">
+                                            <rect key="frame" x="11" y="36" width="123" height="106"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </view>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="animationContainerView" destination="cdc-CG-Wr2" id="Noh-hk-Lsu"/>
                                     <outlet property="cityLabel" destination="VKm-xf-1j3" id="Of2-tB-byX"/>
                                     <outlet property="temperatureLabel" destination="FkO-UQ-Bip" id="n7q-Zm-A1m"/>
                                     <outlet property="weatherImage" destination="cok-b0-4MR" id="wSY-0x-trK"/>
@@ -330,7 +335,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhy-Ue-PTv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="598" y="85"/>
+            <point key="canvasLocation" x="597.70992366412213" y="84.507042253521135"/>
         </scene>
         <!--Profile-->
         <scene sceneID="BHl-cA-p0c">
