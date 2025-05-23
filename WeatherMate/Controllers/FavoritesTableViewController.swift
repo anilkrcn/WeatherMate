@@ -123,4 +123,48 @@ class FavoritesTableViewController: UITableViewController {
         cell.contentView.backgroundColor = .clear
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favoriteToDelete = favorites[indexPath.row]
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
+            
+            // Firestore'dan silme işlemi
+            let db = Firestore.firestore()
+            db.collection("Favorites")
+                .whereField("usermail", isEqualTo: favoriteToDelete.userMail)
+                .whereField("cityName", isEqualTo: favoriteToDelete.cityname)
+                .getDocuments { (querySnapshot, error) in
+                    if let e = error {
+                        print("Error deleting document: \(e)")
+                        completionHandler(false)
+                    } else {
+                        for document in querySnapshot!.documents {
+                            document.reference.delete { err in
+                                if let err = err {
+                                    print("Error removing document: \(err)")
+                                    completionHandler(false)
+                                } else {
+                                    print("Document successfully removed!")
+                                    
+                                    // Firestore'dan verileri tekrar yükle
+                                    DispatchQueue.main.async {
+                                        self.loadFavorites()
+                                    }
+                                    completionHandler(true)
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+        
+        deleteAction.backgroundColor = .red
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+
 }

@@ -74,27 +74,50 @@ class WeatherViewController: UIViewController{
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
-        if !isFavorite{
+        if !isFavorite {
             isFavorite = true
             favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             if let publisher = Auth.auth().currentUser?.email {
                 db.collection("Favorites").addDocument(data: [
                     "usermail": publisher,
                     "cityName": cityLabel.text!
-                ]){(error) in
-                    if let e = error{
+                ]) { (error) in
+                    if let e = error {
                         print("There was an issue saving data to firestore, \(e)")
-                    }else{
-                        print("Succesfully saved data")
+                    } else {
+                        print("Successfully saved data")
                         self.loadFavorites()
                     }
                 }
             }
-        }else{
+        } else {
             isFavorite = false
             favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+            if let publisher = Auth.auth().currentUser?.email, let cityName = cityLabel.text {
+                db.collection("Favorites")
+                    .whereField("usermail", isEqualTo: publisher)
+                    .whereField("cityName", isEqualTo: cityName)
+                    .getDocuments { (querySnapshot, error) in
+                        if let e = error {
+                            print("Error fetching documents: \(e)")
+                        } else if let snapshotDocuments = querySnapshot?.documents {
+                            for document in snapshotDocuments {
+                                document.reference.delete { error in
+                                    if let e = error {
+                                        print("Error deleting document: \(e)")
+                                    } else {
+                                        print("Successfully deleted document")
+                                        self.loadFavorites()
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
         }
     }
+    
     func loadFavorites(){
         let db = Firestore.firestore()
         db.collection("Favorites")
