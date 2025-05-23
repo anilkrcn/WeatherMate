@@ -29,6 +29,7 @@ class WeatherViewController: UIViewController{
     
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
+    var isUsingDeviceLocation = true
     
     let db = Firestore.firestore()
     
@@ -58,6 +59,7 @@ class WeatherViewController: UIViewController{
     }
     
     @IBAction func locationPressed(_ sender: UIButton) {
+        isUsingDeviceLocation = true
         locationManager.requestLocation()
     }
     
@@ -149,6 +151,7 @@ extension WeatherViewController: UITextFieldDelegate {
         if let city = searchTextField.text{
             weatherManager.fetchWeather(cityName: city)
             isFavoriteCity()
+            isUsingDeviceLocation = false
         }
         searchTextField.text = ""
     }
@@ -178,11 +181,13 @@ extension WeatherViewController: WeatherManagerDelegate {
 
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last{
+        if let location = locations.last, isUsingDeviceLocation{
             locationManager.startUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
+            print("\(lat) - \(lon)")
             weatherManager.fetchWeather(latitude: lat, longitude: lon)
+            locationManager.stopUpdatingLocation()
         }
     }
     
