@@ -12,6 +12,7 @@
 **Dark Mode**
 
 <img src="WeatherMate/Screenshots/homeDark.png" alt="Home Screen" width="300"> <img src="WeatherMate/Screenshots/profileDark.png" alt="Profile Screen" width="300">
+<video src="WeatherMate/blob/main/WeatherMate/Videos/AppReview720p.mp4" width="300" autoplay loop muted></video>
 
 ## Features
 
