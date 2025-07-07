@@ -22,11 +22,11 @@ struct WeatherModel{
         case 701...781:
             return "fog"
         case 800:
-            return "sun"
+            return "fog"
         case 801...804:
-            return "cloud"
+            return "sun"
         default:
-            return "cloud"
+            return "rainy"
         }
     }
 }
